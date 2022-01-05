@@ -6,6 +6,15 @@ import datetime
 import os
 import subprocess
 import wolframalpha
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
+
+app_id = os.getenv('WOLFRAMALPHA_CLIENT_ID')
+
+os.environ['WOLFRAMALPHA_CLIENT_ID'] = 'username'
+
+
 
 recognizer = speech_recognition.Recognizer()
 
@@ -15,20 +24,25 @@ speaker.setProperty('rate', 150)
 todo_list = ['Go Shopping', 'Clean Room']
 
 def date():
+    cleared == False
     date = datetime.datetime.today().strftime("%A the %d of %B %Y")
     speaker.say(date)
     speaker.runAndWait()
 
 def time():
+    cleared == False
     time = datetime.datetime.now().strftime("The time is %#I %M %p")
     speaker.say(time)
     speaker.runAndWait()
 
 def open_youtube():
+    cleared == False
     os.system('cmd /c start chrome "youtube.com"')
 
 def create_note():
     global recognizer
+
+    cleared == False
 
     speaker.say("What is your note?")
     speaker.runAndWait()
@@ -69,7 +83,7 @@ def create_note():
 def add_todo():
 
     global recognizer
-
+    cleared == False
     speaker.say("What do you want to add?")
     speaker.runAndWait()
 
@@ -101,6 +115,7 @@ def add_todo():
 
 
 def show_todos():
+    cleared == False
     speaker.say("The items on your to do list are the following")
     for item in todo_list:
         speaker.say(item)
@@ -108,26 +123,32 @@ def show_todos():
 
 
 def hello():
+    cleared == False
     speaker.say("Hello I am bob what can I do for you")
     speaker.runAndWait()
 
 
 def quit():
+    cleared == False
     speaker.say("Bye")
     speaker.runAndWait()
     sys.exit(0)
 
 def restart():
+    cleared == False
     subprocess.call(["shutdown", "/r"])
 
 def shutdown():
+    cleared == False
     subprocess.call(["shutdown", "/s"])
 
 def question():
+    cleared == False
     speaker.say("What is your question?")
     speaker.runAndWait()
 
     global recognizer
+    global app_id
 
     done = False
 
@@ -140,18 +161,26 @@ def question():
                 question = recognizer.recognize_google(audio)
                 question = question.lower()
 
-                app_id = '3QEQ5V-U7G5W5778E'
-
                 client = wolframalpha.Client(app_id)
 
-                res = client.query(question)
+                question_understood = False
+                
+                while not question_understood:
 
-                answer = next(res.results).text
+                    try:
+                        res = client.query(question)
 
-                speaker.say(answer)
-                speaker.runAndWait()
+                        answer = next(res.results).text
 
-                done = True
+                        speaker.say(answer)
+                        speaker.runAndWait()
+
+                        done = True
+
+                        question_understood = True
+                    except:
+                        speaker.say("Question was not understood.")
+
         except speech_recognition.UnknownValueError:
             recognizer = speech_recognition.Recognizer()
             speaker.say("I did not understand. Please try again")

@@ -1,0 +1,41 @@
+{"intents":
+    [
+      {"tag": "greeting",
+        "patterns": ["Hey", "Hello", "What's up", "How is it going", "Hi", "Good day"],
+        "responses": ["Hello", "Hello, what can I do for you"]},
+      {"tag": "create_note",
+        "patterns": ["Please create a new note", "New note", "Create a note", "I want to create a note"],
+        "responses": [""]},
+      {"tag": "add_todo",
+        "patterns": ["I want to add a todo", "Add a new todo", "add a todo to my list", "new item on my todo list"],
+        "responses": [""]},
+      {"tag": "show_todo",
+        "patterns": ["Show my todos", "What are my todos", "What is on my todo list", "Show todos"],
+        "responses": [""]},
+      {"tag": "exit",
+        "patterns": ["bye", "stop","quit","I want to quit", "Goodbye", "I want to exit", "I have to go", "exit", "end"],
+        "responses": [""]},
+      {"tag": "date",
+        "patterns": ["What is the date", "What is the date today", "date"],
+        "responses":[""]},
+      {"tag": "time",
+        "patterns": ["What is the time", "What is the Time now", "time"],
+        "responses":[""]},
+      {"tag": "open_youtube",
+        "patterns": ["Can you open youtube", "Open youtube", "Please open youtube"],
+        "responses":[""]
+      },
+      {"tag": "question",
+        "patterns": ["I have a question", "Can I ask you a question", "Question"],
+        "responses":[""]
+      },
+      {"tag": "shutdown",
+        "patterns": ["Shutdown", "Turn off", "Turn off this computer", "Turn off this pc"],
+        "responses":[""]
+      },
+      {"tag": "restart",
+        "patterns": ["Restart", "Restart my computer", "Restart this pc"],
+        "responses": [""]
+      }
+    ]
+}
