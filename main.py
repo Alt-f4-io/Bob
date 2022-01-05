@@ -174,8 +174,7 @@ mappings = {
 speaker.say("loading")
 speaker.runAndWait()
 assistant = GenericAssistant('intents.json', intent_methods=mappings)
-assistant.train_model()
-assistant.save_model()
+assistant.load_model()
 speaker.say("Ready")
 speaker.runAndWait()
 while True:
